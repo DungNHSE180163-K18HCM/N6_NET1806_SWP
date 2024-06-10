@@ -1,0 +1,22 @@
+name: CI 
+on: 
+  push: 
+    branches: 
+      - main pull_request: 
+    branches: 
+      - main 
+jobs: 
+  build: 
+    runs-on: ubuntu-latest 
+    
+    steps: 
+      - name: Checkout code      uses: actions/checkout@v2 
+      - name: Set up JDK 17      uses: actions/setup-java@v2    with: java-version: '17' 
+      - name: Build with Maven   run: mvn clean test 
+      - name: Extract Jira Issue Key from Commit Message     id: extract_issue_key 
+
+run: |   
+      commit_message=$(git log -1 --pretty=%B) 
+      echo "Commit message: $commit_message"     if [[ "$commit_message" =~ ([A-Z]+-[0-9]+) ]]; then       echo "Found Jira issue key: ${BASH_REMATCH[1]}"       echo "JIRA_ISSUE_KEY=${BASH_REMATCH[1]}" >> $GITHUB_ENV     else       echo "No Jira issue key found in commit message"       exit 1       fi 
+      - name: Create data.json for Jira Update     run: | 
+          echo '{ "transition": { "id": "11" }, "fields": { "10008": "Pass" } }' > data.json - name: Update Jira run: | curl -D- -u ${{ secrets.JIRA_USERNAME }}:${{ secrets.JIRA_API_TOKEN }} -X POST --data @data.json -H "Content-Type: application/json" https://chiltq6.atlassian.net/rest/api/2/issue/${{ env.JIRA_ISSUE_KEY }}/transitions
