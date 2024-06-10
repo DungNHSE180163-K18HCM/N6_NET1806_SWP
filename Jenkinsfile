@@ -8,7 +8,7 @@ script {
 checkout scm
 // Extract Jira issue key from the latest commit message
 def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-def jiraIssueKey = commitMessage.find(/PROJECT-\d+/) // Adjust the regex to match your Jira issue key pattern and replace PROJECT to PROJECT KEY
+def jiraIssueKey = commitMessage.find(/N6NET1806-\d+/) // Adjust the regex to match your Jira issue key pattern and replace PROJECT to PROJECT KEY
 if (!jiraIssueKey) {
 error "Jira issue key not found in the commit message."
 }
@@ -36,7 +36,7 @@ def status = testResults.failCount == 0 ? "Pass" : "Fail"
 def attachment = "target/surefire-reports/testng.xml"
 // Update the custom field "Testcase Result" on Jira
 httpRequest(
-url: "https://your-domain.atlassian.net/rest/api/2/issue/${jiraIssueKey}/transitions",
+url: "https://fpt-team-iavaurtp.atlassian.net/rest/api/2/issue/${jiraIssueKey}/transitions",
 httpMode: 'POST',
 customHeaders: [
 [name: 'Authorization', value: jiraAuth],
@@ -45,14 +45,14 @@ customHeaders: [
 requestBody: """
 {
 "fields": {
-"customfield_12345": "${status}" // Replace 'customfield_12345' with the ID of the 'Testcase Result' field
+"Testcase Result": "${status}" // Replace 'customfield_12345' with the ID of the 'Testcase Result' field
 }
 }
 """
 )
 // Attach test result file to Jira issue
 httpRequest(
-url: "https://your-domain.atlassian.net/rest/api/2/issue/${jiraIssueKey}/attachments",
+url: "https://fpt-team-iavaurtp.atlassian.net/rest/api/2/issue/${jiraIssueKey}/attachments",
 httpMode: 'POST',
 customHeaders: [
 [name: 'Authorization', value: jiraAuth],
