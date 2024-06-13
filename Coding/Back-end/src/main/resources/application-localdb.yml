@@ -1,0 +1,34 @@
+#website url to crawl
+page:
+    url: ${URL:https://www.goldrate24.com/gold-prices/}
+
+exchange:
+    url: ${URL:https://wise.com/vn/currency-converter/usd-to-vnd-rate}
+
+firebase:
+    url: ${CONFIG_PATH}
+
+paypal:
+    client-id: ${PAYPAL_CLIENT_ID}
+    client-secret: ${PAYPAL_CLIENT_SECRET}
+    mode: ${PAYPAL_MODE}
+
+spring:
+    config:
+        import: optional:file:.env[.properties]
+    application:
+        name: JewelryProduction
+    datasource:
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        url: ${DB_URL}
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWORD}
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.SQLServerDialect
+                jdbc:
+                    time_zone: Asia/Ho_Chi_Minh
+        show-sql: true
