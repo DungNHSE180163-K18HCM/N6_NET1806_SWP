@@ -14,9 +14,18 @@ export default function Login() {
   const body = { username, password };
   let bool;
 
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+    return passwordRegex.test(password);
+  };
+
   //Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validatePassword(password)) {
+      setData('Password must be at least 8 characters long, contain at least 1 special character, 1 number, and 1 uppercase letter.');
+      return;
+    }
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.stopPropagation();
