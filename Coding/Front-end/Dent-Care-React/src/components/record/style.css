@@ -1,0 +1,27 @@
+
+.container-custom{
+    border: solid 2px;
+}
+
+.row-custom{
+    border-bottom:solid 2px ;
+}
+
+.col-border{
+    border-right: solid 2px;
+}
+.row-custom>*{
+    padding: 0;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+.checkbox-group label {
+    flex: 1 0 30%;
+}
+
+.last-row{
+    border-bottom: none ;
+}

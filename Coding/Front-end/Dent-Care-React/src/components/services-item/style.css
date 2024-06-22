@@ -1,0 +1,30 @@
+.custom-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #06A3DA;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    color: white;
+    padding: 20px;
+    margin: 0 -10px;
+  }
+  
+  .custom-prev {
+    left: -40px; /* Adjust based on your design */
+  }
+  
+  .custom-next {
+    right: -40px; /* Adjust based on your design */
+  }
+  
+  .slick-slide{
+    width: 280px !important; 
+    margin-right: 10px;
+    margin-left: 10px;
+  }

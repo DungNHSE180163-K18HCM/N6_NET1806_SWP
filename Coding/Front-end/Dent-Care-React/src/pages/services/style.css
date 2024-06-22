@@ -1,0 +1,6 @@
+.price-item {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.price-item:hover{opacity:0.7;}

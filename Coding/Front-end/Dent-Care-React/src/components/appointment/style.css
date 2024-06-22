@@ -1,0 +1,12 @@
+label.ant-form-item-required::before{
+    display: none !important;
+}
+
+.appointment-btn{
+    margin-top: 20px;
+    margin-right: 100px;
+}
+
+:where(.css-dev-only-do-not-override-3rel02).ant-form-item .ant-form-item-label{
+    text-align: start !important;
+}

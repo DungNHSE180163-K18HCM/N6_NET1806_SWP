@@ -1,0 +1,4 @@
+email,result,exceptionExpected,recipient,msgBody,subject,fullName,buttonValue,link
+email,true,false,email,msgBody,subject,fullName,buttonValue,link
+nonexistent@email.com,,true,,,,,,
+email,true,false,email,msgBody,subject,fullName,buttonValue,link
