@@ -42,16 +42,22 @@ A web-based booking system for dental clinic services is a software application 
 | Nguyễn Trọng Phúc      | SE171107              |
 | Trần Phạm Cường        | SE171590              |
 
-## Jira Test Case Assignments Sprint 1
+## Jira Test Case Assignments Sprint 1 Use Cases
 
-| Member                 | Test Case                 |
+  1. ***UC01 - Register an Account***
+  2. ***UC02 - Log in***
+  3. ***UC03 - Reset Password***
+  4. ***UC04 - Forget Password***
+
+
+| Member                 | Use Cases                 |
 |------------------------|---------------------------|
-| Nguyễn Hoàng Dũng      | T1, T13, T14, T23         |
-| Đặng Nhật Phi          | T18, T19, T20, T21        |
-| Cao Hoàng Thanh        | T10, T15, T16, T22, T24   |
-| Ngô Quang Phước Thành  | T2, T4, T6, T7            |
-| Nguyễn Trọng Phúc      | T3, T5, T8, T25           |
-| Trần Phạm Cường        | T9, T11, T12, T17         |
+| Nguyễn Hoàng Dũng      | UC01, UC02, UC04          |
+| Đặng Nhật Phi          | UC03                      |
+| Cao Hoàng Thanh        | UC02, UC03                |
+| Ngô Quang Phước Thành  | UC01                      |
+| Nguyễn Trọng Phúc      | UC01, UC04                |
+| Trần Phạm Cường        | UC02                      |
 
 ### References
  **Full Credit goes to these GitHub links:**
