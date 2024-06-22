@@ -52,3 +52,8 @@ A web-based booking system for dental clinic services is a software application 
 | Ngô Quang Phước Thành  | T2, T4, T6, T7            |
 | Nguyễn Trọng Phúc      | T3, T5, T8, T25           |
 | Trần Phạm Cường        | T9, T11, T12, T17         |
+
+### References
+ **Full Credit goes to these GitHub links:**
+  1. ***Dentcare - BE:*** [https://github.com/ntrongphuc1302/dentcare_BE.git]
+  2. ***Dentcare - React*** [https://github.com/tranh0anghuan/Dent-Care-React.git]
