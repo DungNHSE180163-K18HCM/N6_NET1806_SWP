@@ -50,14 +50,14 @@ A web-based booking system for dental clinic services is a software application 
   4. ***UC04 - Forget Password***
 
 
-| Member                 | Use Cases                 |
-|------------------------|---------------------------|
-| Nguyễn Hoàng Dũng      | UC01, UC02, UC04          |
-| Đặng Nhật Phi          | UC03                      |
-| Cao Hoàng Thanh        | UC02, UC03                |
-| Ngô Quang Phước Thành  | UC01                      |
-| Nguyễn Trọng Phúc      | UC01, UC04                |
-| Trần Phạm Cường        | UC02                      |
+| Member                 | Use Cases                 | No. Test cases |
+|------------------------|---------------------------|----------------|
+| Nguyễn Hoàng Dũng      | UC01, UC02, UC04          | 4              |
+| Đặng Nhật Phi          | UC03                      | 4              |
+| Cao Hoàng Thanh        | UC02, UC03                | 5              |
+| Ngô Quang Phước Thành  | UC01                      | 4              |
+| Nguyễn Trọng Phúc      | UC01, UC04                | 4              |
+| Trần Phạm Cường        | UC02                      | 4              |
 
 ### References
  **Full Credit goes to these GitHub links:**
