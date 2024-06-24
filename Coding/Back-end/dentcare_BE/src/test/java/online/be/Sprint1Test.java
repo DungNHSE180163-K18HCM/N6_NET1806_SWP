@@ -109,47 +109,6 @@ class Sprint1Test {
         verify(passwordEncoder, times(1)).encode("password");
     }
 
-//    @Test
-//    void testLogin_AccountLocked() {
-//        // Setup
-//        LoginRequest loginRequest = new LoginRequest();
-//        loginRequest.setEmail("test@example.com");
-//        loginRequest.setPassword("wrongpassword");
-//
-//        when(mockAuthenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-//                .thenThrow(new LockedException("Account is locked"));
-//
-//        // Run the test
-//        Exception exception = assertThrows(LockedException.class, () -> {
-//            authenticationAPI.login(loginRequest);
-//        });
-//
-//        // Verify the results
-//        Assertions.assertEquals("Account is locked", exception.getMessage());
-//    }
-//
-//    @Test
-//    void testLogin_AccountNotVerified() {
-//        // Setup
-//        LoginRequest loginRequest = new LoginRequest();
-//        loginRequest.setEmail("test@example.com");
-//        loginRequest.setPassword("password");
-//
-//        Account unverifiedAccount = new Account();
-//        unverifiedAccount.setEmail("test@example.com");
-//        unverifiedAccount.setPassword("encodedPassword");
-//        unverifiedAccount.setEnabled(false);
-//
-//        when(mockAuthenticationRepository.findAccountByEmail("test@example.com")).thenReturn(unverifiedAccount);
-//
-//        // Run the test
-//        Exception exception = assertThrows(AccountNotVerifiedException.class, () -> {
-//            authenticationAPI.login(loginRequest);
-//        });
-//
-//        // Verify the results
-//        Assertions.assertEquals("Account is not verified", exception.getMessage());
-//    }
 
     @Test
     void testForgetPassword_Successful() throws Exception {

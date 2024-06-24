@@ -3,6 +3,7 @@ package online.be.service;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
+import lombok.Setter;
 import online.be.entity.Account;
 import online.be.entity.DentalClinic;
 import online.be.enums.Role;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Setter
 public class AuthenticationService implements UserDetailsService {
 
     @Autowired
