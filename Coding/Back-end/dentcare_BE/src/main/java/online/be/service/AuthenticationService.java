@@ -168,14 +168,22 @@ public class AuthenticationService implements UserDetailsService {
     }
 
     public void forgotPasswordRequest(String email) {
-        Account account = authenticationRepository.findAccountByEmail(email);
-        if (account == null) {
-            try {
-                throw new BadRequestException("Account not found!");
-            } catch (BadRequestException e) {
-                throw new RuntimeException(e);
-            }
+        Account account;
+        if (email.matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            account = authenticationRepository.findAccountByEmail(email);
+            if (account == null) throw new BadRequestException("Account not found!");
         }
+        else
+            throw new BadRequestException("Invalid Email Address!");
+//
+//        Account account = authenticationRepository.findAccountByEmail(email);
+//        if (account == null) {
+//            try {
+//                throw new BadRequestException("Account not found!");
+//            } catch (BadRequestException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
 
         EmailDetail emailDetail = new EmailDetail();
         emailDetail.setRecipient(account.getEmail());
