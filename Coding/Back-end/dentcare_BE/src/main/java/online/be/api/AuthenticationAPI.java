@@ -1,7 +1,6 @@
 package online.be.api;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import jakarta.validation.Valid;
 import online.be.entity.Account;
 import online.be.model.request.*;
 import online.be.model.response.AccountResponse;
@@ -43,7 +42,10 @@ public class AuthenticationAPI {
         return ResponseEntity.ok(account);
     }
 
+
     @PostMapping("register-by-admin") // /api/register
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
+//    @PreAuthorize("hasAuthority('MANAGER')")
     public ResponseEntity register(@RequestBody AdminRegisterRequest adminRegisterRequest) {
         // account đã add xuống db
         Account account = authenticationService.registerAdmin(adminRegisterRequest);
@@ -73,6 +75,7 @@ public class AuthenticationAPI {
     }
 
     @GetMapping("account")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity getAllAccount() {
         return ResponseEntity.ok(authenticationService.getAllAccount());
     }

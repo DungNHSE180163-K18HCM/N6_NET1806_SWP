@@ -3,10 +3,11 @@ package online.be.service;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
-import lombok.Setter;
 import online.be.entity.Account;
 import online.be.entity.DentalClinic;
+import online.be.entity.Room;
 import online.be.enums.Role;
+import online.be.enums.Status;
 import online.be.exception.BadRequestException;
 import online.be.exception.NotFoundException;
 import online.be.model.*;
@@ -14,6 +15,7 @@ import online.be.model.request.*;
 import online.be.model.response.AccountResponse;
 import online.be.repository.AuthenticationRepository;
 import online.be.repository.ClinicRepository;
+import online.be.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,7 +29,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Setter
 public class AuthenticationService implements UserDetailsService {
 
     @Autowired
@@ -39,6 +40,9 @@ public class AuthenticationService implements UserDetailsService {
 
     @Autowired
     ClinicRepository clinicRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -61,6 +65,7 @@ public class AuthenticationService implements UserDetailsService {
         account.setRole(Role.CUSTOMER);
         account.setEmail(registerRequest.getEmail());
         account.setFullName(registerRequest.getFullName());
+        account.setStatus(Status.ACTIVE);
 
         try {
             EmailDetail emailDetail = new EmailDetail();
@@ -71,7 +76,7 @@ public class AuthenticationService implements UserDetailsService {
             emailDetail.setButtonValue("Login to system");
             emailDetail.setLink("http://dentcare.website/login");
             emailService.sendMailTemplate(emailDetail);
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
@@ -91,11 +96,24 @@ public class AuthenticationService implements UserDetailsService {
         account.setRole(adminRegisterRequest.getRole());
         account.setEmail(adminRegisterRequest.getEmail());
         account.setFullName(adminRegisterRequest.getFullName());
+        account.setStatus(Status.ACTIVE);
         // Gán Clinic ID cho tài khoản từ yêu cầu đăng ký
         DentalClinic clinic = null;
-        if (adminRegisterRequest.getRole() != Role.ADMIN) {
+        Room room = null;
+        if (adminRegisterRequest.getRole() == Role.MANAGER ||
+            adminRegisterRequest.getRole() == Role.STAFF ||
+            adminRegisterRequest.getRole() == Role.DENTIST) {
             clinic = clinicRepository.findById(adminRegisterRequest.getClinicId())
                     .orElseThrow(() -> new NotFoundException("Cannot find this clinicId"));
+
+        }
+        if (adminRegisterRequest.getRole() == Role.DENTIST) {
+            room = roomRepository.findById(adminRegisterRequest.getRoomId());
+            if (room != null) {
+                account.setRoom(room);
+            } else {
+                throw new NotFoundException("Cannot find this Room");
+            }
         }
 
         account.setDentalClinic(clinic);
@@ -138,6 +156,7 @@ public class AuthenticationService implements UserDetailsService {
             accountResponse.setPhone(account.getPhone());
             accountResponse.setToken(tokenService.generateToken(account));
             accountResponse.setRole(account.getRole());
+            accountResponse.setDentalClinic(account.getDentalClinic());
 //            return accountResponse;
 
         }catch (FirebaseAuthException e){
@@ -163,27 +182,19 @@ public class AuthenticationService implements UserDetailsService {
         accountResponse.setFullName(account.getFullName());
         accountResponse.setRole(account.getRole());
         accountResponse.setId(account.getId());
-
+        accountResponse.setDentalClinic(account.getDentalClinic());
         return accountResponse;
     }
 
     public void forgotPasswordRequest(String email) {
-        Account account;
-        if (email.matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            account = authenticationRepository.findAccountByEmail(email);
-            if (account == null) throw new BadRequestException("Account not found!");
+        Account account = authenticationRepository.findAccountByEmail(email);
+        if (account == null) {
+            try {
+                throw new BadRequestException("Account not found!");
+            } catch (BadRequestException e) {
+                throw new RuntimeException(e);
+            }
         }
-        else
-            throw new BadRequestException("Invalid Email Address!");
-//
-//        Account account = authenticationRepository.findAccountByEmail(email);
-//        if (account == null) {
-//            try {
-//                throw new BadRequestException("Account not found!");
-//            } catch (BadRequestException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
 
         EmailDetail emailDetail = new EmailDetail();
         emailDetail.setRecipient(account.getEmail());
@@ -208,13 +219,15 @@ public class AuthenticationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserDetails user = authenticationRepository.findAccountByEmail(email);
-        if (user == null) throw new UsernameNotFoundException("Account with email "+email+" not found");
-
-        return user;
+        return authenticationRepository.findAccountByEmail(email);
     }
 
     public Account getCurrentAccount() {
         return (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    // Assuming we have a method like this in AuthenticationService
+    public void logout() {
+        SecurityContextHolder.clearContext();
     }
 }

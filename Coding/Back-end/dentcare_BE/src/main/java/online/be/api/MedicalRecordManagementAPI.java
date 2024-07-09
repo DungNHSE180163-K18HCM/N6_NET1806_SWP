@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/medicalrecord")
+@RequestMapping("/api/medical-record")
 @SecurityRequirement(name = "api")
 public class MedicalRecordManagementAPI {
 
@@ -19,6 +19,26 @@ public class MedicalRecordManagementAPI {
     @GetMapping
     public ResponseEntity getAllMedicalRecords() {
         return ResponseEntity.ok(medicalRecordService.getAllMedicalRecords());
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity getRecordById(@PathVariable long id) {
+        return ResponseEntity.ok(medicalRecordService.getRecordById(id));
+    }
+
+    @GetMapping("/patient/phone/{phone}")
+    public ResponseEntity getRecordsByPatientPhone(@PathVariable String phone) {
+        return ResponseEntity.ok(medicalRecordService.getRecordsByPatientPhone(phone));
+    }
+
+    @GetMapping("/patient/id/{id}")
+    public ResponseEntity getRecordsByPatientId(@PathVariable long id) {
+        return ResponseEntity.ok(medicalRecordService.getMedicalRecordsByPatientId(id));
+    }
+
+    @GetMapping("/appointment/{id}")
+    public ResponseEntity getAppointmentsByAppointmentPatientId(@PathVariable long id) {
+        return ResponseEntity.ok(medicalRecordService.getAppointmentsByAppointmentPatientId(id));
     }
 
     @PostMapping
@@ -35,5 +55,10 @@ public class MedicalRecordManagementAPI {
     public ResponseEntity deleteMedicalRecord(@PathVariable long id) {
         medicalRecordService.deleteMedicalRecord(id);
         return ResponseEntity.ok("Medical Record deleted successfully");
+    }
+
+    @GetMapping("/dentist/{id}")
+    public ResponseEntity getRecordsByDentistId(@PathVariable long id) {
+        return ResponseEntity.ok(medicalRecordService.getRecordsByDentistId(id));
     }
 }

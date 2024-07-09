@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString
+
 public class Account implements UserDetails {
 
     @Id
@@ -50,6 +50,10 @@ public class Account implements UserDetails {
     @JoinColumn(name = "dental_clinic_id")
     private DentalClinic dentalClinic;
 
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     private List<Patient> patients;
@@ -60,11 +64,19 @@ public class Account implements UserDetails {
 
     @JsonIgnore
     @OneToMany(mappedBy = "account")
-    List<CheckIn> checkIns;
+    List<AppointmentPatient> appointmentPatients;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "account2")
+    List<AppointmentPatient> appointmentPatients2;
 
     @JsonIgnore
     @OneToMany(mappedBy = "account")
-    List<Slot> slots;
+    List<WorkingDayOff> workingDayOffs;
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "account")
+//    List<Slot> slots;
 
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "account")
@@ -73,6 +85,10 @@ public class Account implements UserDetails {
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     List<Qualification> qualifications;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "dentist")
+    List<MedicalRecord> medicalRecords;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

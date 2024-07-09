@@ -34,6 +34,14 @@ public class PatientService {
         return patientRepository.findByName(name);
     }
 
+    public Patient getPatientByPhone(String phone) {
+        return patientRepository.findByPhoneNumber(phone);
+    }
+
+    public List<Patient> getPatientsByAccountId(long id) {
+        return patientRepository.findByAccountIdAndPatientEnum(id, PatientEnum.ACTIVE);
+    }
+
     public Patient createPatient(PatientRequest patientRequest) {
 //        Account account = authenticationRepository.findById(patientRequest.getAccountId()).get();
         Account account = authenticationService.getCurrentAccount();

@@ -1,11 +1,15 @@
 package online.be.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.type.DateTime;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import online.be.enums.CheckInStatus;
 import online.be.enums.Status;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,17 +31,26 @@ public class AppointmentPatient {
     @JoinColumn(name = "patient_id")
     Patient patient;
 
+    LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "dentistServices_id")
     DentistServices dentistServices;
 
     @Enumerated(EnumType.STRING)
-    Status status;
+    CheckInStatus status;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "appointmentPatient")
-    CheckIn checkIns;
+//    @JsonIgnore
+//    @OneToOne(mappedBy = "appointmentPatient")
+//    CheckIn checkIns;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "cus_id")
+    Account account2;
 
     @JsonIgnore
     @OneToMany(mappedBy = "appointmentPatient")

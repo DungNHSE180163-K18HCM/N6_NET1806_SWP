@@ -19,6 +19,8 @@ public class MedicalRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
+    String name;
+
     String note;
 
     String diagnosis;
@@ -33,4 +35,8 @@ public class MedicalRecord {
     @JsonIgnore
     @OneToMany(mappedBy = "medicalRecord")
     List<TreatmentPlan> treatmentPlans;
+
+    @ManyToOne
+    @JoinColumn(name = "dentist_id")
+    Account dentist;
 }

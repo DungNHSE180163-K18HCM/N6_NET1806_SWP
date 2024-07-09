@@ -2,7 +2,7 @@ package online.be.service;
 
 import online.be.entity.Account;
 import online.be.entity.DentalClinic;
-import online.be.enums.ClinicEnum;
+
 import online.be.enums.Role;
 import online.be.enums.Status;
 import online.be.exception.NotFoundException;
@@ -35,6 +35,10 @@ public class AccountService {
         return accountRepository.
                 findByRoleAndDentalClinicIdAndDentistServices_ServiceDetailId(role, clinicId, serviceId);
     }
+
+//    public List<Account> getRoomsByDentistId(long id) {
+//        return accountRepository.findRoomsById(id);
+//    }
 
     public Account getAccountById(long id) {
         try {

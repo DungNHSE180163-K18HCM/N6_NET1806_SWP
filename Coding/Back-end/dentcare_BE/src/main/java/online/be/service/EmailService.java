@@ -18,7 +18,7 @@ public class EmailService {
 
     @Autowired
     private JavaMailSender javaMailSender;
-    public void sendMailTemplate(EmailDetail emailDetail) throws RuntimeException{
+    public void sendMailTemplate(EmailDetail emailDetail){
         try{
             Context context = new Context();
 
@@ -40,7 +40,6 @@ public class EmailService {
             javaMailSender.send(mimeMessage);
         }catch (MessagingException messagingException){
             messagingException.printStackTrace();
-            throw new RuntimeException(messagingException.getMessage());
         }
     }
 }

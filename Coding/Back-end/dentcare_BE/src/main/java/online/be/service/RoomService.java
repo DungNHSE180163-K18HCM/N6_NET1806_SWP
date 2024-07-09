@@ -33,6 +33,14 @@ public class RoomService {
         return roomRepository.findRoomByName(name);
     }
 
+    public List<Room> getRoomsByDentistId(long id) {
+        return roomRepository.findRoomsByAccountsId(id);
+    }
+
+    public List<Room> getRoomsByClinicId(long id) {
+        return roomRepository.findByClinicId(id);
+    }
+
     public Room createRoom(RoomRequest roomRequest) {
         Room newRoom = new Room();
         newRoom.setName(roomRequest.getName());
@@ -51,6 +59,16 @@ public class RoomService {
             return roomRepository.save(existingRoom);
         } else {
             throw new NotFoundException("Room not found with id " + roomUpdateRequest.getId());
+        }
+    }
+
+    public Room activeRoom(long id) {
+        Room room = roomRepository.findById(id);
+        if (room != null) {
+            room.setRoomEnum(RoomEnum.ACTIVE);
+            return roomRepository.save(room);
+        } else {
+            throw new NotFoundException("Room not found with id " + id);
         }
     }
 
