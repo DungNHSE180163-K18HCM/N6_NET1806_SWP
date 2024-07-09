@@ -34,7 +34,7 @@ function DentistByClinic() {
                             item?.status !== 'INACTIVE' ? (<div className="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                                <div className="team-item" onClick={() => navigate(`/clinic/${id}/service/${sid}/dentist/${item?.id}`)}>
                                     <div className="position-relative rounded-top" style={{ zIndex: 1 }}>
-                                        <img className="img-fluid rounded-top w-100" src={`/${item?.fullName}.jpg`} alt />
+                                        <img width={300} height={400} className=" rounded-top w-100" src={`/${item?.fullName}.jpg`} alt />
                                         <div className="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
                                             {/* <Link to={'/appointment'} className="btn btn-primary py-2 px-3">Appointment</Link> */}
                                             <span onClick={() => navigate(`/clinic/${id}/service/${sid}/dentist/${item?.id}`)} className="btn btn-primary py-2 px-3">Appointment</span>

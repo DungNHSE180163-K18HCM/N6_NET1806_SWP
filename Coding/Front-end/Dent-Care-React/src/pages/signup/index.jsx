@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import './sign.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -13,11 +12,7 @@ function SignupPage() {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
-    console.log(values.email);
-    console.log(values.password);
-    console.log(values.phone);
-    console.log(values.fullName);
-
+    console.log(values.email, values.password, values.phone, values.fullName);
     setLoading(true);
 
     try {
@@ -78,7 +73,7 @@ function SignupPage() {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('The new password that you entered do not match!'));
+                  return Promise.reject(new Error('The passwords that you entered do not match!'));
                 },
               }),
             ]}

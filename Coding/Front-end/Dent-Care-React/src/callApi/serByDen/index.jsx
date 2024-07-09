@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 
 const useServiceByDentistID = () => {
 
-    const { id } = useParams()
+    const { did } = useParams()
 
 
     const [service, setService] = useState([])
     const getServiceByDentistID = async () => {
         try {
-            const res = await api.get(`/dentist-service/search-by-dentist-id/${id}`)
+            const res = await api.get(`/dentist-service/search-by-dentist-id/${did}`)
             setService(res.data)
         } catch (error) {
             console.log(error);

@@ -10,3 +10,7 @@ label.ant-form-item-required::before{
 :where(.css-dev-only-do-not-override-3rel02).ant-form-item .ant-form-item-label{
     text-align: start !important;
 }
+
+:where(.css-dev-only-do-not-override-3rel02)[class^="ant-modal"], :where(.css-dev-only-do-not-override-3rel02)[class*=" ant-modal"]{
+    margin-top: 200px !important;
+}

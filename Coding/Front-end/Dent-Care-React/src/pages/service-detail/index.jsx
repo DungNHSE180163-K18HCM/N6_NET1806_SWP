@@ -9,11 +9,11 @@ import ScrollToTop from '../../components/scrollToTop';
 
 function ServiceDetailPage() {
 
-  const { sid } = useParams()
+    const { sid } = useParams()
 
     const { service } = useServiceDetail();
 
-    const { clinic} = useClinicByServicesID();
+    const { clinic } = useClinicByServicesID();
 
     const navigate = useNavigate();
 
@@ -30,7 +30,6 @@ function ServiceDetailPage() {
                             <div className="section-title bg-light rounded h-100 p-5">
                                 <h5 className="position-relative d-inline-block text-primary text-uppercase">Our Dentist</h5>
                                 <h1 className="display-6 mb-4">Cutting-edge equipment ensures optimal treatment</h1>
-                                <Link to={'/appointment'} className="btn btn-primary py-3 px-5">Appointment</Link>
                             </div>
                         </div>
 
@@ -53,7 +52,7 @@ function ServiceDetailPage() {
                                         <p className="text-primary mb-0">{item?.address}</p>
                                     </div>
                                 </Link> */}
-                                <div  onClick={() => navigate(`/service/${sid}/clinic/${item.id}`)} className="team-item">
+                                <div onClick={() => navigate(`/service/${sid}/clinic/${item.id}`)} className="team-item">
                                     <div className="position-relative rounded-top" style={{ zIndex: 1 }}>
                                         <img className="img-fluid rounded-top w-100" src={`/${item?.clinicName}.jpg`} alt />
                                         <div className="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
@@ -75,8 +74,20 @@ function ServiceDetailPage() {
                 </div>
             </div>
 
-            <Offer/>
-            
+            <div className="container-fluid bg-offer my-5 py-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div className="container py-5">
+                    <div className="row justify-content-center">
+                        <div className="col-lg-7 wow zoomIn" data-wow-delay="0.6s">
+                            <div className="offer-text text-center rounded p-5">
+                                <h1 className="display-5 text-white">Save 30% On Your First Dental Checkup</h1>
+                                <p className="text-white mb-4">We're excited to introduce our First Dental Checkup Package, an exclusive offer designed to provide new patients with a comprehensive introduction to our high-quality dental care services at a special rate. This package includes everything you need for a thorough initial assessment and a healthy start to your dental journey with us</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
                 <div className="container">
@@ -98,7 +109,6 @@ function ServiceDetailPage() {
                                     <h5 className="mb-3"><i className="fa fa-check-circle text-primary me-3" />Fair Prices</h5>
                                 </div>
                             </div>
-                            <Link to={'/appointment'} className="btn btn-primary py-3 px-5 mt-4 wow zoomIn" data-wow-delay="0.6s">Make Appointment</Link>
                         </div>
                         <div className="col-lg-5" style={{ minHeight: 500 }}>
                             <div className="position-relative h-100">

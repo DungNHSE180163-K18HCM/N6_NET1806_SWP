@@ -7,11 +7,12 @@ import {
   CheckCircleOutlined,
   TeamOutlined,
   AppstoreAddOutlined,
-  PlusOutlined 
+  PlusOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
-import { Avatar, Breadcrumb, Layout, Menu, Space, theme } from "antd";
+import { Avatar, Breadcrumb, Layout, Menu, Space, theme, Button, Popconfirm, message } from "antd";
 import { Footer } from "antd/es/layout/layout";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const { Header, Content, Sider } = Layout;
 
@@ -40,70 +41,72 @@ const Dashboard = () => {
   const dataOpen = JSON.parse(localStorage.getItem("keys")) ?? [];
 
   const [openKeys, setOpenKeys] = useState(dataOpen);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (role === "owner") {
-      setItems([
-        getItem("Category", "category"),
-        getItem("Hồ sơ", "profile", <ProfileOutlined />),
-        getItem("Quản lý Clubs", "club", <HeartOutlined />, [
-          getItem("Club 1", "club1"),
-          getItem("Club 2", "club2"),
-          getItem("Club 3", "club3"),
-          getItem("All Promotion", "all-promotion"),
-        ]),
-        getItem("Quản lý Staffs", "staffs", <UserOutlined />, [
-          getItem("Club 1", "staff-club-1"),
-          getItem("Club 2", "staff-club-2"),
-          getItem("Club 3", "staff-club-3"),
-          getItem("All Staffs", "all-staffs"),
-        ]),
-        getItem("Thống kê", "statistics", <BarChartOutlined />, [
-          getItem("Club 1", "stats-club-1"),
-          getItem("Club 2", "stats-club-2"),
-          getItem("Club 3", "stats-club-3"),
-          getItem("All Clubs", "all-clubs"),
-        ]),
-      ]);
-    }
-    if (role === "staff") {
-      setItems([
-        getItem("Category", "category"),
-        getItem("Hồ sơ", "profile", <ProfileOutlined />),
-        getItem("Club", "clubs", <HeartOutlined />, [
-          getItem("Time Slot", "time-slot"),
-          getItem("Promotion", "promotion"),
-        ]),
-        getItem("Booking", "booking", <CheckCircleOutlined />, [
-          getItem("Court ID 1", "court-1"),
-          getItem("Court ID 2", "court-2"),
-        ]),
-      ]);
-    }
+    // if (role === "owner") {
+    //   setItems([
+    //     getItem("Category", "category"),
+    //     getItem("Hồ sơ", "profile", <ProfileOutlined />),
+    //     getItem("Quản lý Clubs", "club", <HeartOutlined />, [
+    //       getItem("Club 1", "club1"),
+    //       getItem("Club 2", "club2"),
+    //       getItem("Club 3", "club3"),
+    //       getItem("All Promotion", "all-promotion"),
+    //     ]),
+    //     getItem("Quản lý Staffs", "staffs", <UserOutlined />, [
+    //       getItem("Club 1", "staff-club-1"),
+    //       getItem("Club 2", "staff-club-2"),
+    //       getItem("Club 3", "staff-club-3"),
+    //       getItem("All Staffs", "all-staffs"),
+    //     ]),
+    //     getItem("Thống kê", "statistics", <BarChartOutlined />, [
+    //       getItem("Club 1", "stats-club-1"),
+    //       getItem("Club 2", "stats-club-2"),
+    //       getItem("Club 3", "stats-club-3"),
+    //       getItem("All Clubs", "all-clubs"),
+    //     ]),
+    //   ]);
+    // }
+    // if (role === 'DENTIST') {
+    //   setItems([
+    //     getItem("thanhaf", "category"),
+    //     getItem("Hồ sơ", "profile", <ProfileOutlined />),
+    //     getItem("Club", "clubs", <HeartOutlined />, [
+    //       getItem("Time Slot", "time-slot"),
+    //       getItem("Promotion", "promotion"),
+    //     ]),
+    //     getItem("Booking", "booking", <CheckCircleOutlined />, [
+    //       getItem("Court ID 1", "court-1"),
+    //       getItem("Court ID 2", "court-2"),
+    //     ]),
+    //   ]);
+    // }
 
     if (role === "admin") {
       setItems([
-        getItem("Product", "product", <PlusOutlined />),
-        getItem("Category", "category", <AppstoreAddOutlined />),
-        getItem("Hồ sơ", "profile", <ProfileOutlined />),
-        getItem("Quản lý Clubs", "clubs", <HeartOutlined />, [
-          getItem("Club 1", "club1"),
-          getItem("Club 2", "club2"),
-          getItem("Club 3", "club3"),
-          getItem("All Promotion", "all-promotion"),
-        ]),
-        getItem("Quản lý Accounts", "accounts", <TeamOutlined />, [
-          getItem("Club 1", "account-club-1"),
-          getItem("Club 2", "account-club-2"),
-          getItem("Club 3", "account-club-3"),
-          getItem("All Staffs", "all-staffs"),
-        ]),
-        getItem("Thống kê", "statistics", <BarChartOutlined />, [
-          getItem("Club 1", "stats-club-1"),
-          getItem("Club 2", "stats-club-2"),
-          getItem("Club 3", "stats-club-3"),
-          getItem("All Clubs", "all-clubs"),
-        ]),
+        getItem("New clinic", "product", <PlusOutlined />),
+        // getItem("Hồ sơ", "information", <PlusOutlined />),
+        getItem("Account", "category", <ProfileOutlined />),
+        
+        // getItem("Quản lý Clubs", "clubs", <HeartOutlined />, [
+        //   getItem("Club 1", "club1"),
+        //   getItem("Club 2", "club2"),
+        //   getItem("Club 3", "club3"),
+        //   getItem("All Promotion", "all-promotion"),
+        // ]),
+        // getItem("Quản lý Accounts", "accounts", <TeamOutlined />, [
+        //   getItem("Club 1", "account-club-1"),
+        //   getItem("Club 2", "account-club-2"),
+        //   getItem("Club 3", "account-club-3"),
+        //   getItem("All Staffs", "all-staffs"),
+        // ]),
+        // getItem("Thống kê", "statistics", <BarChartOutlined />, [
+        //   getItem("Club 1", "stats-club-1"),
+        //   getItem("Club 2", "stats-club-2"),
+        //   getItem("Club 3", "stats-club-3"),
+        //   getItem("All Clubs", "all-clubs"),
+        // ]),
       ]);
     }
   }, []);
@@ -122,6 +125,12 @@ const Dashboard = () => {
   useEffect(() => {
     handleSubMenuOpen([...openKeys, key]);
   }, [currentURI]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+    message.success('Logged out successfully');
+  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -162,7 +171,28 @@ const Dashboard = () => {
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
-          <header></header>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingRight: 24,
+            }}
+          >
+            <div>
+              <header></header>
+            </div>
+            <Popconfirm
+              title="Are you sure you want to logout?"
+              onConfirm={handleLogout}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button type="primary" icon={<LogoutOutlined />}>
+                Logout
+              </Button>
+            </Popconfirm>
+          </div>
         </Header>
         <Content
           style={{ margin: "0 16px", display: "flex", flexDirection: "column" }}
@@ -188,7 +218,7 @@ const Dashboard = () => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center", backgroundColor: "#E3F2EE" }}>
-          DATSAN79 ©{new Date().getFullYear()} Created by DEMI
+          ADMIN FANPAGE ©{new Date().getFullYear()} DENTCARE CLINIC
         </Footer>
       </Layout>
     </Layout>

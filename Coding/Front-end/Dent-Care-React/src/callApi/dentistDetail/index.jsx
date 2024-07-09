@@ -3,13 +3,13 @@ import api from '../../config/axios';
 import { useParams } from 'react-router-dom';
 
 const useDentistDetail = () => {
-    const { id } = useParams()
+    const { did } = useParams()
 
     const [dentist, setDentist] = useState({});
 
     const getDentistDetail = async () => {
         try {
-            const res = await api.get(`/account/${id}`);
+            const res = await api.get(`/account/${did}`);
             setDentist(res.data);
         } catch (error) {
             console.log(error);

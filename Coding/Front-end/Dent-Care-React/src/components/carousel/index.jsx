@@ -15,7 +15,7 @@ function Carousel() {
                     <div className="p-3" style={{maxWidth: 900}}>
                         <h5 className="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
                         <h1 className="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental Treatment</h1>
-                        <Link onClick={ScrollToTop} to={'/appointment'}  className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</Link>
+                        <Link onClick={ScrollToTop} to={'/clinic'}  className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</Link>
                         <Link onClick={ScrollToTop} to={'/contact'}  className="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</Link>
                     </div>
                     </div>
