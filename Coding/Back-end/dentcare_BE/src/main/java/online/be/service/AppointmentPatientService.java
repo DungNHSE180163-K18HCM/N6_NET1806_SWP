@@ -44,10 +44,19 @@ public class AppointmentPatientService {
         if (appointmentPatient == null) {
             AppointmentPatient appointment = new AppointmentPatient();
             var patient = patientRepository.findById(appointmentRequest.getPatientId());
+            if (patient == null) {
+                throw new NotFoundException("Patient id not found");
+            }
             appointment.setPatient(patient);
             var slot = slotRepository.findById(appointmentRequest.getSlotId());
+            if (slot == null) {
+                throw new NotFoundException("Slot id not found");
+            }
             appointment.setSlot(slot);
             var dentistService = dentistServiceRepository.findById(appointmentRequest.getDentistServiceId());
+            if (dentistService == null) {
+                throw new NotFoundException("Dentist service id not found");
+            }
             appointment.setDentistServices(dentistService);
             appointment.setStatus(Status.ACTIVE);
 
