@@ -61,6 +61,28 @@ A web-based booking system for dental clinic services is a software application 
 | Nguyễn Trọng Phúc      | UC05             |
 | Trần Phạm Cường        | UC02             |
 
+## Jira Test Case Assignments Sprint 2 Use Cases
+
+  1. ***UC07 - Update Appointment***
+  2. ***UC08 - Cancel Appointment***
+  3. ***UC09 - Register Clinic Information***
+  4. ***UC10 - Update Clinic Information***
+  5. ***UC11 - Remove Clinic***
+  6. ***UC12 - Notification***
+  7. ***UC13 - Create Room***
+  8. ***UC14 - Create Service***
+  9. ***UC15 - Check in***
+
+
+| Member                 | Use Cases        |
+|------------------------|------------------|
+| Nguyễn Hoàng Dũng      | UC08             |
+| Đặng Nhật Phi          | UC11             |
+| Cao Hoàng Thanh        | UC10             |
+| Ngô Quang Phước Thành  | UC12             |
+| Nguyễn Trọng Phúc      | UC07             |
+| Trần Phạm Cường        | UC09             |
+
 ### References
  **Full Credit goes to these GitHub links:**
   1. ***Dentcare - BE:*** [https://github.com/ntrongphuc1302/dentcare_BE.git]
