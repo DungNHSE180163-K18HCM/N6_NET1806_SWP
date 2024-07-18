@@ -85,3 +85,5 @@ A web-based booking system for dental clinic services is a software application 
  **Full Credit goes to these GitHub links:**
   1. ***Dentcare - BE:*** [https://github.com/ntrongphuc1302/dentcare_BE.git]
   2. ***Dentcare - React*** [https://github.com/tranh0anghuan/Dent-Care-React.git]
+  3. ***Software Requirements Specification*** [https://docs.google.com/document/d/1NvikyFaXieUS8CwodKytHWRqUsq4LosN/edit?usp=sharing&ouid=105282651013333144158&rtpof=true&sd=true]
+
